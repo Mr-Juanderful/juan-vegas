@@ -69,10 +69,10 @@ a { color: var(--blue-link); }
   background:
     linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.18)),
     url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
-      center 42% / cover no-repeat;
+      center 68% / cover no-repeat;
   /* mild zoom-out so more mountain + dirt show */
   transform: scale(0.92);
-  transform-origin: center 42%;
+  transform-origin: center 68%;
   will-change: transform;
   z-index: -1;
 }
@@ -221,34 +221,106 @@ a { color: var(--blue-link); }
 
 .values-track::-webkit-scrollbar { display: none; }
 
+.values-hint {
+  margin: 0 auto 0.75rem;
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .value-card {
   scroll-snap-align: center;
   position: relative;
   min-height: 280px;
   border-radius: 4px;
+  perspective: 1200px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+}
+
+.value-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.value-card.is-flipped .value-card-inner {
+  transform: rotateY(180deg);
+}
+
+.value-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
   overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.value-front {
   background-image: var(--bg);
   background-size: cover;
   background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.value-card::before {
+.value-front::before {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(22, 22, 22, 0.35);
 }
 
-.value-card span {
+.value-front span {
   position: relative;
   z-index: 1;
   font-family: var(--serif);
   font-size: clamp(2rem, 8vw, 2.6rem);
   color: #fff;
   letter-spacing: 0.02em;
+}
+
+.value-back {
+  background: linear-gradient(160deg, #1a2433 0%, #243447 55%, #2c3e50 100%);
+  color: #fff;
+  transform: rotateY(180deg);
+  text-align: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.value-back-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+}
+
+.value-back blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(0.95rem, 3.6vw, 1.08rem);
+  font-style: italic;
+  line-height: 1.55;
+  max-width: 28rem;
+}
+
+.value-back cite {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
 }
 
 .carousel-dots {
@@ -471,7 +543,8 @@ a { color: var(--blue-link); }
   }
 
   .values .carousel-dots { display: none; }
-  .value-card { min-height: 320px; }
+  .value-card,
+  .value-card-inner { min-height: 320px; }
 
   .record-track {
     grid-auto-columns: minmax(42vw, 420px);

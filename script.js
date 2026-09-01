@@ -1,3 +1,29 @@
+
+function setupFlipCards() {
+  const cards = Array.from(document.querySelectorAll("[data-flip-card]"));
+  if (!cards.length) return;
+
+  function setFlipped(card, on) {
+    card.classList.toggle("is-flipped", on);
+    card.setAttribute("aria-pressed", on ? "true" : "false");
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const willFlip = !card.classList.contains("is-flipped");
+      cards.forEach((c) => setFlipped(c, false));
+      setFlipped(card, willFlip);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+}
+
 function setupCarousel(trackSel, dotsSel, prevSel, nextSel) {
   const track = document.querySelector(trackSel);
   if (!track) return;
@@ -88,6 +114,7 @@ function setupParallax() {
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 window.scrollTo(0, 0);
 
+setupFlipCards();
 setupCarousel("[data-values-track]", "[data-values-dots]");
 setupCarousel("[data-record-track]", "[data-record-dots]", "[data-prev]", "[data-next]");
 setupParallax();

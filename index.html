@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Karla:wght@400;500;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=herotop9" />
+  <link rel="stylesheet" href="styles.css?v=herotop10" />
 </head>
 <body>
   <section class="hero" aria-label="Let's connect">
@@ -44,15 +44,43 @@
   </section>
 
   <section class="values" aria-label="God, Family, Country">
+    <p class="values-hint">Tap a card to flip</p>
     <div class="values-track" data-values-track tabindex="0">
-      <article class="value-card" style="--bg: url('https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/2DF31FEE-AD26-42BB-B542-E97997205F78.jpeg/:/rs=w:1200,m')">
-        <span>God</span>
+      <article class="value-card" data-flip-card tabindex="0" role="button" aria-pressed="false" aria-label="God — tap to flip">
+        <div class="value-card-inner">
+          <div class="value-face value-front" style="--bg: url('https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/2DF31FEE-AD26-42BB-B542-E97997205F78.jpeg/:/rs=w:1200,m')">
+            <span>God</span>
+          </div>
+          <div class="value-face value-back">
+            <p class="value-back-title">God</p>
+            <blockquote>“Religion or the duty which we owe to our Creator… can be directed only by reason and conviction, not by force or violence.”</blockquote>
+            <cite>— James Madison</cite>
+          </div>
+        </div>
       </article>
-      <article class="value-card" style="--bg: url('https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/94213CF9-03EC-4F80-A3AD-808B4BF04AE2.jpeg/:/rs=w:1200,m')">
-        <span>Family</span>
+      <article class="value-card" data-flip-card tabindex="0" role="button" aria-pressed="false" aria-label="Family — tap to flip">
+        <div class="value-card-inner">
+          <div class="value-face value-front" style="--bg: url('https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/94213CF9-03EC-4F80-A3AD-808B4BF04AE2.jpeg/:/rs=w:1200,m')">
+            <span>Family</span>
+          </div>
+          <div class="value-face value-back">
+            <p class="value-back-title">Family</p>
+            <blockquote>“The voluntary transfers strengthened the bonds of the family; the compulsory transfers weaken those bonds.”</blockquote>
+            <cite>— Milton Friedman</cite>
+          </div>
+        </div>
       </article>
-      <article class="value-card" style="--bg: url('https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/0AE5625B-3438-44ED-879A-4D5BC6CBF0C5.jpeg/:/rs=w:1200,m')">
-        <span>Country</span>
+      <article class="value-card" data-flip-card tabindex="0" role="button" aria-pressed="false" aria-label="Country — tap to flip">
+        <div class="value-card-inner">
+          <div class="value-face value-front" style="--bg: url('https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/0AE5625B-3438-44ED-879A-4D5BC6CBF0C5.jpeg/:/rs=w:1200,m')">
+            <span>Country</span>
+          </div>
+          <div class="value-face value-back">
+            <p class="value-back-title">Country</p>
+            <blockquote>“The basic functions of government are to defend the nation against foreign enemies, to prevent coercion of some individuals by others… Because government is doing so many things it ought not to be doing, it performs the functions it ought to be performing badly.”</blockquote>
+            <cite>— Milton Friedman</cite>
+          </div>
+        </div>
       </article>
     </div>
     <div class="carousel-dots" data-values-dots aria-hidden="true"></div>
@@ -120,6 +148,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=herotop9"></script>
+  <script src="script.js?v=herotop10"></script>
 </body>
 </html>
