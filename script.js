@@ -1,93 +1,57 @@
-(function () {
-  function setupCarousel(track, dotsHost, prevBtn, nextBtn) {
-    if (!track) return;
+function setupCarousel(trackSel, dotsSel, prevSel, nextSel) {
+  const track = document.querySelector(trackSel);
+  if (!track) return;
+  const cards = Array.from(track.children);
+  if (!cards.length) return;
 
-    var cards = Array.prototype.slice.call(track.children);
-    if (!cards.length) return;
+  const dotsWrap = dotsSel ? document.querySelector(dotsSel) : null;
+  let index = 0;
 
-    function scrollToIndex(index) {
-      var clamped = Math.max(0, Math.min(index, cards.length - 1));
-      cards[clamped].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-      updateDots(clamped);
-    }
-
-    function currentIndex() {
-      var left = track.scrollLeft;
-      var best = 0;
-      var bestDist = Infinity;
-      cards.forEach(function (card, i) {
-        var dist = Math.abs(card.offsetLeft - left);
-        if (dist < bestDist) {
-          bestDist = dist;
-          best = i;
-        }
-      });
-      return best;
-    }
-
-    function updateDots(active) {
-      if (!dotsHost) return;
-      var buttons = dotsHost.querySelectorAll("button");
-      buttons.forEach(function (btn, i) {
-        if (i === active) btn.setAttribute("aria-current", "true");
-        else btn.removeAttribute("aria-current");
+  function go(i) {
+    index = Math.max(0, Math.min(cards.length - 1, i));
+    cards[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    if (dotsWrap) {
+      Array.from(dotsWrap.children).forEach((d, di) => {
+        d.setAttribute("aria-current", di === index ? "true" : "false");
       });
     }
+  }
 
-    if (dotsHost) {
-      dotsHost.innerHTML = "";
-      cards.forEach(function (_, i) {
-        var btn = document.createElement("button");
-        btn.type = "button";
-        btn.setAttribute("aria-label", "Go to slide " + (i + 1));
-        btn.addEventListener("click", function () {
-          scrollToIndex(i);
-        });
-        dotsHost.appendChild(btn);
-      });
-      updateDots(0);
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener("click", function () {
-        scrollToIndex(currentIndex() - 1);
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener("click", function () {
-        scrollToIndex(currentIndex() + 1);
-      });
-    }
-
-    var ticking = false;
-    track.addEventListener("scroll", function () {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(function () {
-        updateDots(currentIndex());
-        ticking = false;
-      });
-    });
-
-    track.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        scrollToIndex(currentIndex() + 1);
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        scrollToIndex(currentIndex() - 1);
-      }
+  if (dotsWrap) {
+    dotsWrap.innerHTML = "";
+    cards.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Go to slide " + (i + 1));
+      b.addEventListener("click", () => go(i));
+      dotsWrap.appendChild(b);
     });
   }
 
-  var recordTrack = document.querySelector("[data-record-track]");
-  var recordDots = document.querySelector("[data-record-dots]");
-  var prev = document.querySelector("[data-prev]");
-  var next = document.querySelector("[data-next]");
-  setupCarousel(recordTrack, recordDots, prev, next);
+  const prev = prevSel ? document.querySelector(prevSel) : null;
+  const next = nextSel ? document.querySelector(nextSel) : null;
+  if (prev) prev.addEventListener("click", () => go(index - 1));
+  if (next) next.addEventListener("click", () => go(index + 1));
 
-  var valuesTrack = document.querySelector("[data-values-track]");
-  var valuesDots = document.querySelector("[data-values-dots]");
-  setupCarousel(valuesTrack, valuesDots, null, null);
-})();
+  track.addEventListener("scroll", () => {
+    const mid = track.scrollLeft + track.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    cards.forEach((c, i) => {
+      const center = c.offsetLeft + c.offsetWidth / 2;
+      const d = Math.abs(center - mid);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    index = best;
+    if (dotsWrap) {
+      Array.from(dotsWrap.children).forEach((d, di) => {
+        d.setAttribute("aria-current", di === index ? "true" : "false");
+      });
+    }
+  }, { passive: true });
+
+  go(0);
+}
+
+setupCarousel("[data-values-track]", "[data-values-dots]");
+setupCarousel("[data-record-track]", "[data-record-dots]", "[data-prev]", "[data-next]");

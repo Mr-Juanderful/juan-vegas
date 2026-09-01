@@ -1,34 +1,9 @@
-# Juan Martinez — personal site
+# juan.vegas
 
-Static personal homepage for **Juan Martinez** (plain HTML, CSS, and a little vanilla JS).
+Static personal site for Juan Martinez. Hosted on GitHub Pages.
 
-## Live preview (GitHub Pages)
+**Preview:** https://mr-juanderful.github.io/juan-vegas/
 
-Expected URL once Pages is enabled from the `main` branch `/` (root):
+Custom domain (`juan.vegas`) is not pointed here yet — do that only after Juan confirms.
 
-**https://mr-juanderful.github.io/juan-vegas/**
-
-Custom domain will be configured later. Do not change DNS from this repo setup alone.
-
-## Enable GitHub Pages (if not already on)
-
-1. Open the repo: https://github.com/Mr-Juanderful/juan-vegas
-2. Go to **Settings → Pages**
-3. Under **Build and deployment → Source**, choose **Deploy from a branch**
-4. Branch: **main** · Folder: **/ (root)**
-5. Click **Save**
-6. Wait a minute, then visit https://mr-juanderful.github.io/juan-vegas/
-
-## Local preview
-
-Open `index.html` in a browser, or serve the folder with any static file server.
-
-## Stack
-
-- No React / Next / Astro
-- No ads
-- No GoDaddy branding
-
-## Copyright
-
-Copyright © 2026 Juan Martinez - All Rights Reserved.
+Layout matches the prior GoDaddy site: Red Rock hero with Let’s connect, bio + portrait, God / Family / Country photo slides, On the record, footer.
