@@ -44,13 +44,13 @@ a { color: var(--blue-link); }
 
 .hero {
   position: relative;
-  min-height: 560px;
-  min-height: calc(560px + env(safe-area-inset-top, 0px));
+  min-height: 640px;
+  min-height: calc(640px + env(safe-area-inset-top, 0px));
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* Red Rock under the iPhone status bar */
-  padding: calc(3.25rem + env(safe-area-inset-top, 0px)) 1.25rem 7rem;
+  /* Red Rock under the iPhone status bar — extra bottom room so Facebook isn't covered */
+  padding: calc(3.25rem + env(safe-area-inset-top, 0px)) 1.25rem 9.5rem;
   text-align: center;
   color: #fff;
   overflow: hidden;
@@ -155,13 +155,13 @@ a { color: var(--blue-link); }
   background: linear-gradient(
     180deg,
     rgba(232, 220, 200, 0) 0%,
-    rgba(232, 220, 200, 0) 110px,
-    rgba(232, 220, 200, 0.75) 170px,
-    var(--sand) 230px,
+    rgba(232, 220, 200, 0) 90px,
+    rgba(232, 220, 200, 0.7) 150px,
+    var(--sand) 200px,
     var(--sand) 100%
   );
   padding: 0 1.25rem 3rem;
-  margin-top: -280px;
+  margin-top: -200px;
   box-shadow: none;
 }
 
@@ -302,9 +302,10 @@ a { color: var(--blue-link); }
 
 .tap-hint {
   position: absolute;
-  left: 50%;
-  bottom: 0.85rem;
-  transform: translateX(-50%);
+  right: 0.7rem;
+  bottom: 0.65rem;
+  left: auto;
+  transform: none;
   z-index: 2;
   color: #fff;
   opacity: 0.62;
@@ -543,8 +544,8 @@ a { color: var(--blue-link); }
 @media (min-width: 768px) {
 
   .hero {
-    min-height: 640px;
-    padding-bottom: 8rem;
+    min-height: 720px;
+    padding-bottom: 10rem;
   }
 
   .hero-actions {
@@ -553,7 +554,7 @@ a { color: var(--blue-link); }
   }
 
   .bio {
-    margin-top: -310px;
+    margin-top: -230px;
   }
 
   .bio-inner {
