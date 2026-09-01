@@ -18,7 +18,10 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background-color: #161616; /* Safari chrome / overscroll — matches footer */
+}
 
 body {
   margin: 0;
@@ -26,46 +29,53 @@ body {
   font-size: 16px;
   line-height: 1.8;
   color: var(--ink);
-  background:
+  /* solid color first — Safari samples background-color, not gradients */
+  background-color: #161616;
+  background-image:
     linear-gradient(
       180deg,
-      var(--sky) 0%,
-      var(--sky-deep) 8%,
-      #b7c6d8 18%,
-      var(--sand) 42%,
+      transparent 0%,
+      transparent 28%,
+      #b7c6d8 42%,
+      var(--sand) 55%,
       var(--sand-deep) 72%,
       var(--floor) 100%
     );
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 img { max-width: 100%; display: block; }
 
 a { color: var(--blue-link); }
 
-.sky-cap {
-  height: 48px;
-  background: linear-gradient(180deg, var(--sky-deep) 0%, var(--sky) 100%);
-}
+.sky-cap { display: none; }
 
 .hero {
   position: relative;
   min-height: 560px;
+  min-height: calc(560px + env(safe-area-inset-top, 0px));
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 4rem 1.25rem 7rem;
+  /* Red Rock under the iPhone status bar */
+  padding: calc(3.25rem + env(safe-area-inset-top, 0px)) 1.25rem 7rem;
   text-align: center;
   color: #fff;
   overflow: hidden;
   isolation: isolate;
+  margin-top: 0;
 }
 
 .hero-bg {
   position: absolute;
-  inset: -12% 0 -12% 0;
+  /* bleed into notch / status bar */
+  top: 0;
+  right: 0;
+  bottom: -12%;
+  left: 0;
+  height: auto;
   background:
     linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.18)),
     url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
@@ -128,16 +138,20 @@ a { color: var(--blue-link); }
 
 .pill-outline {
   background: var(--blue);
+  border: 2px solid #111;
   color: #fff;
-  border-color: var(--blue);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.15);
 }
 
 .pill-outline:hover,
 .pill-outline:focus-visible {
   background: #4e6d94;
-  border-color: #4e6d94;
+  border-color: #111;
   color: #fff;
 }
+
+
+
 
 .bio {
   position: relative;
@@ -365,15 +379,29 @@ a { color: var(--blue-link); }
 }
 
 .site-footer {
-  background: var(--footer);
+  /* solid color so Safari can tint the address bar (not white) */
+  background-color: var(--footer);
   color: var(--footer-text);
-  padding: 1.5rem 1.25rem;
+  padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   font-size: 0.92rem;
+  position: relative;
+}
+
+/* Extra paint under Safari's bottom chrome / home indicator */
+.site-footer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: max(env(safe-area-inset-bottom, 0px), 48px);
+  background-color: var(--footer);
+  pointer-events: none;
 }
 
 .site-footer p { margin: 0; }
@@ -397,7 +425,6 @@ a { color: var(--blue-link); }
 }
 
 @media (min-width: 768px) {
-  .sky-cap { height: 64px; }
 
   .hero {
     min-height: 640px;
