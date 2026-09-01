@@ -1,7 +1,7 @@
 /* herotop26 overrides */
 .hero-bg { transform: scale(1.08); transform-origin: center bottom; }
 .bio-photo { box-shadow: none; }
-.tap-hint { filter: none; }
+.tap-hint { filter: none; gap: 0; }
 .tap-hint-img {
   width: 56px;
   height: 56px;
@@ -17,5 +17,5 @@
   text-transform: lowercase;
   font-variant-numeric: normal;
   font-feature-settings: normal;
-  margin-top: -0.22rem; /* sit a little closer to the hand */
+  margin-top: -0.45rem; /* closer to the hand icon */
 }
