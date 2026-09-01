@@ -7,9 +7,12 @@ function setupCarousel(trackSel, dotsSel, prevSel, nextSel) {
   const dotsWrap = dotsSel ? document.querySelector(dotsSel) : null;
   let index = 0;
 
-  function go(i) {
+  function go(i, behavior) {
     index = Math.max(0, Math.min(cards.length - 1, i));
-    cards[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    const card = cards[index];
+    // Scroll ONLY the track horizontally — never scrollIntoView (that jumps the page)
+    const left = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+    track.scrollTo({ left: Math.max(0, left), behavior: behavior || "smooth" });
     if (dotsWrap) {
       Array.from(dotsWrap.children).forEach((d, di) => {
         d.setAttribute("aria-current", di === index ? "true" : "false");
@@ -50,7 +53,8 @@ function setupCarousel(trackSel, dotsSel, prevSel, nextSel) {
     }
   }, { passive: true });
 
-  go(0);
+  // Instant on load so the page stays at the top
+  go(0, "auto");
 }
 
 function setupParallax() {
@@ -63,7 +67,9 @@ function setupParallax() {
 
   function update() {
     const y = window.scrollY || 0;
+    // Background moves slower (lag behind scroll)
     if (bg) bg.style.transform = "translate3d(0, " + (y * 0.28) + "px, 0)";
+    // Portrait moves faster upward relative to the canyon
     if (photo) photo.style.transform = "translate3d(0, " + (y * -0.18) + "px, 0)";
     ticking = false;
   }
@@ -78,6 +84,12 @@ function setupParallax() {
   update();
 }
 
+// Keep load at top (Safari sometimes restores mid-page)
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
+
 setupCarousel("[data-values-track]", "[data-values-dots]");
 setupCarousel("[data-record-track]", "[data-record-dots]", "[data-prev]", "[data-next]");
 setupParallax();
+
+window.addEventListener("load", () => window.scrollTo(0, 0));
