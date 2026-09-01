@@ -364,7 +364,7 @@ a { color: var(--blue-link); }
   margin: 0;
   font-family: var(--font);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
