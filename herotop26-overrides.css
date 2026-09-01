@@ -1,0 +1,20 @@
+/* herotop26 overrides */
+.hero-bg { transform: scale(1.08); transform-origin: center bottom; }
+.bio-photo { box-shadow: none; }
+.tap-hint { filter: none; }
+.tap-hint-img {
+  width: 56px;
+  height: 56px;
+  display: block;
+  background: url("tap-icon.svg") center / contain no-repeat;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+.tap-hint-label {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  font-variant-numeric: normal;
+  font-feature-settings: normal;
+}
