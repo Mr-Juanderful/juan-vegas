@@ -17,4 +17,5 @@
   text-transform: lowercase;
   font-variant-numeric: normal;
   font-feature-settings: normal;
+  margin-top: -0.22rem; /* sit a little closer to the hand */
 }
