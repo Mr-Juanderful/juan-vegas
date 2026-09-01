@@ -148,7 +148,7 @@ a { color: var(--blue-link); }
   z-index: 2;
   background: var(--sand);
   padding: 0 1.25rem 3rem;
-  margin-top: -140px;
+  margin-top: -200px;
   /* soft fade from canyon into desert floor */
   box-shadow: 0 -40px 50px -20px var(--sand);
 }
@@ -164,6 +164,7 @@ a { color: var(--blue-link); }
 }
 
 .bio-photo {
+  margin-top: -0.5rem;
   width: min(70vw, 280px);
   height: min(70vw, 280px);
   border-radius: 50%;
@@ -422,6 +423,8 @@ a { color: var(--blue-link); }
   justify-content: center;
   text-decoration: none;
   font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
@@ -437,7 +440,7 @@ a { color: var(--blue-link); }
   }
 
   .bio {
-    margin-top: -160px;
+    margin-top: -220px;
   }
 
   .bio-inner {
