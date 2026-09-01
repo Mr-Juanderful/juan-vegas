@@ -53,5 +53,33 @@ function setupCarousel(trackSel, dotsSel, prevSel, nextSel) {
   go(0);
 }
 
+function setupParallax() {
+  const bg = document.querySelector("[data-parallax-bg]");
+  const photo = document.querySelector("[data-parallax-photo]");
+  if (!bg && !photo) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let ticking = false;
+
+  function update() {
+    const y = window.scrollY || 0;
+    // Background moves slower (lag behind scroll)
+    if (bg) bg.style.transform = "translate3d(0, " + (y * 0.28) + "px, 0)";
+    // Portrait moves faster upward relative to the canyon
+    if (photo) photo.style.transform = "translate3d(0, " + (y * -0.18) + "px, 0)";
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  update();
+}
+
 setupCarousel("[data-values-track]", "[data-values-dots]");
 setupCarousel("[data-record-track]", "[data-record-dots]", "[data-prev]", "[data-next]");
+setupParallax();

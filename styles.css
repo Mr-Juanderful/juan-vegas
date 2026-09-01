@@ -1,12 +1,13 @@
 :root {
+  --sky: #2f3d4f;
+  --sand: #e8dcc8;
+  --sand-deep: #d9cbb3;
   --blue: #5e7fa9;
   --blue-link: #6182ab;
   --ink: #111111;
   --muted: #161616;
   --footer: #161616;
   --footer-text: #f7f7f7;
-  --white: #ffffff;
-  --bg: #ffffff;
   --font: "Karla", system-ui, sans-serif;
   --serif: "Old Standard TT", Georgia, serif;
   --script: "Great Vibes", cursive;
@@ -22,7 +23,7 @@ body {
   font-size: 16px;
   line-height: 1.8;
   color: var(--ink);
-  background: var(--bg);
+  background: var(--sand);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -30,27 +31,44 @@ img { max-width: 100%; display: block; }
 
 a { color: var(--blue-link); }
 
+.sky-cap {
+  height: 56px;
+  background: linear-gradient(180deg, #243243 0%, var(--sky) 100%);
+}
+
 .hero {
-  min-height: 600px;
-  background:
-    linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.18)),
-    url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
-      center / cover no-repeat;
+  position: relative;
+  min-height: 560px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 4.5rem 1.25rem 3rem;
+  padding: 4rem 1.25rem 7rem;
   text-align: center;
   color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -12% 0 -12% 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.18)),
+    url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
+      center / cover no-repeat;
+  will-change: transform;
+  z-index: -1;
 }
 
 .hero-inner {
+  position: relative;
+  z-index: 1;
   width: min(100%, 420px);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 .hero-title {
@@ -81,7 +99,6 @@ a { color: var(--blue-link); }
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-decoration: none;
-  text-transform: none;
   border: 2px solid transparent;
 }
 
@@ -107,8 +124,11 @@ a { color: var(--blue-link); }
 }
 
 .bio {
-  background: #fff;
-  padding: 3rem 1.25rem;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  padding: 0 1.25rem 3rem;
+  margin-top: -140px;
 }
 
 .bio-inner {
@@ -127,7 +147,18 @@ a { color: var(--blue-link); }
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+  border: 4px solid rgba(255,255,255,0.85);
+  will-change: transform;
+  background: var(--sand-deep);
+}
+
+.bio-copy {
+  background: rgba(232, 220, 200, 0.72);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 1.25rem 1.1rem 1.5rem;
+  width: min(100%, 36rem);
 }
 
 .bio-copy h2 {
@@ -216,16 +247,11 @@ a { color: var(--blue-link); }
   width: 18px;
 }
 
-.record .carousel-dots button {
-  background: #c9c0b3;
-}
-
-.record .carousel-dots button[aria-current="true"] {
-  background: var(--blue);
-}
+.record .carousel-dots button { background: #c9b89a; }
+.record .carousel-dots button[aria-current="true"] { background: var(--blue); }
 
 .record {
-  background: #fff;
+  background: var(--sand);
   padding: 3rem 1.25rem 3.5rem;
 }
 
@@ -253,8 +279,8 @@ a { color: var(--blue-link); }
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  border: 1px solid #cfcfcf;
-  background: #fff;
+  border: 1px solid #c9b89a;
+  background: rgba(255,255,255,0.55);
   font-size: 1.4rem;
   cursor: pointer;
   line-height: 1;
@@ -263,25 +289,49 @@ a { color: var(--blue-link); }
 .record-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(90%, 1fr);
-  gap: 1rem;
+  grid-auto-columns: minmax(78%, 320px);
+  gap: 0.85rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: 11%;
   scroll-behavior: smooth;
-  padding-bottom: 0.5rem;
+  padding: 0.35rem 11% 1rem;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 
 .record-track::-webkit-scrollbar { display: none; }
 
 .quote-card {
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   text-align: center;
-  padding: 0.5rem 0.25rem 1rem;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 18px;
+  box-shadow: 0 10px 28px rgba(26, 31, 43, 0.1);
+  padding: 1.35rem 1.15rem 1.5rem;
+  min-height: 100%;
+}
+
+.outlet-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.95rem;
+}
+
+.outlet-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #f4f1ea;
+  padding: 6px;
 }
 
 .outlet {
-  margin: 0 0 0.85rem;
+  margin: 0;
   font-family: var(--font);
   font-weight: 700;
   font-size: 0.78rem;
@@ -292,7 +342,7 @@ a { color: var(--blue-link); }
 .quote-card blockquote {
   margin: 0 0 1.25rem;
   font-family: var(--serif);
-  font-size: 1.15rem;
+  font-size: 1.08rem;
   font-style: italic;
   line-height: 1.7;
   color: #222;
@@ -331,15 +381,33 @@ a { color: var(--blue-link); }
 }
 
 @media (min-width: 768px) {
+  .sky-cap { height: 72px; }
+
+  .hero {
+    min-height: 640px;
+    padding-bottom: 8rem;
+  }
+
   .hero-actions {
     flex-direction: row;
     width: auto;
+  }
+
+  .bio {
+    margin-top: -160px;
   }
 
   .bio-inner {
     flex-direction: row;
     text-align: left;
     gap: 2.5rem;
+    align-items: flex-end;
+  }
+
+  .bio-copy {
+    text-align: left;
+    width: auto;
+    flex: 1;
   }
 
   .bio-copy p { margin-left: 0; }
@@ -354,16 +422,26 @@ a { color: var(--blue-link); }
   }
 
   .values .carousel-dots { display: none; }
-
   .value-card { min-height: 320px; }
 
   .record-track {
-    grid-auto-columns: minmax(48%, 1fr);
+    grid-auto-columns: minmax(52%, 380px);
+    scroll-padding-inline: 24%;
+    padding-inline: 24%;
   }
 }
 
 @media (min-width: 1024px) {
   .record-track {
-    grid-auto-columns: minmax(32%, 1fr);
+    grid-auto-columns: minmax(42%, 400px);
+    scroll-padding-inline: 29%;
+    padding-inline: 29%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg,
+  .bio-photo {
+    transform: none !important;
   }
 }
