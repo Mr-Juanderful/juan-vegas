@@ -60,17 +60,18 @@ a { color: var(--blue-link); }
 
 .hero-bg {
   position: absolute;
-  top: -6%;
-  right: -8%;
-  bottom: -28%;
-  left: -8%;
+  top: -10%;
+  right: -10%;
+  bottom: -35%;
+  left: -10%;
   height: auto;
   background:
-    linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.2)),
+    linear-gradient(rgba(0,0,0,0.06), rgba(0,0,0,0.22)),
     url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
-      center 78% / cover no-repeat;
-  transform: scale(1.08);
-  transform-origin: center 85%;
+      center 92% / cover no-repeat;
+  /* bias hard toward desert floor / rocks; sky mostly cropped off the top */
+  transform: scale(1.18);
+  transform-origin: center bottom;
   will-change: transform;
   z-index: -1;
 }
@@ -120,6 +121,9 @@ a { color: var(--blue-link); }
 .pill-solid {
   background: #fff;
   color: #222;
+  /* stay solid white even when overlapping the canyon */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .pill-solid:hover,
@@ -147,11 +151,18 @@ a { color: var(--blue-link); }
 .bio {
   position: relative;
   z-index: 2;
-  background: var(--sand);
+  /* transparent at top so Red Rock dirt shows behind the portrait overlap */
+  background: linear-gradient(
+    180deg,
+    rgba(232, 220, 200, 0) 0%,
+    rgba(232, 220, 200, 0) 110px,
+    rgba(232, 220, 200, 0.75) 170px,
+    var(--sand) 230px,
+    var(--sand) 100%
+  );
   padding: 0 1.25rem 3rem;
-  margin-top: -230px;
-  /* soft fade from canyon into desert floor */
-  box-shadow: 0 -40px 50px -20px var(--sand);
+  margin-top: -280px;
+  box-shadow: none;
 }
 
 .bio-inner {
@@ -227,7 +238,7 @@ a { color: var(--blue-link); }
   perspective: 1200px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  background: #1a2433;
+  background: var(--blue);
   outline: none;
   -webkit-user-select: none;
   user-select: none;
@@ -241,7 +252,7 @@ a { color: var(--blue-link); }
   transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  background: #1a2433;
+  background: var(--blue);
   border-radius: 4px;
 }
 
@@ -542,7 +553,7 @@ a { color: var(--blue-link); }
   }
 
   .bio {
-    margin-top: -260px;
+    margin-top: -310px;
   }
 
   .bio-inner {
