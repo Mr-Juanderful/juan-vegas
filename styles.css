@@ -20,7 +20,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--blue); /* older Safari / load flash */
+  background-color: var(--blue); /* Safari status / address bar tint */
 }
 
 body {
@@ -29,16 +29,8 @@ body {
   font-size: 16px;
   line-height: 1.8;
   color: var(--ink);
-  /* desert beige behind portrait + quotes (not dark gray) */
-  background-color: var(--sand);
-  background-image:
-    linear-gradient(
-      180deg,
-      var(--sand) 0%,
-      var(--sand) 48%,
-      var(--sand-deep) 72%,
-      var(--floor) 100%
-    );
+  /* button blue — Safari samples this for top + bottom chrome */
+  background-color: var(--blue);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   min-height: 100dvh;
@@ -136,14 +128,15 @@ a { color: var(--blue-link); }
 
 .pill-outline {
   background: var(--blue);
-  border: 2px solid var(--blue);
+  border: 2px solid #111;
   color: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.15);
 }
 
 .pill-outline:hover,
 .pill-outline:focus-visible {
   background: #4e6d94;
-  border-color: #4e6d94;
+  border-color: #111;
   color: #fff;
 }
 
@@ -153,9 +146,11 @@ a { color: var(--blue-link); }
 .bio {
   position: relative;
   z-index: 2;
-  background: transparent;
+  background: var(--sand);
   padding: 0 1.25rem 3rem;
   margin-top: -140px;
+  /* soft fade from canyon into desert floor */
+  box-shadow: 0 -40px 50px -20px var(--sand);
 }
 
 .bio-inner {
@@ -385,7 +380,7 @@ a { color: var(--blue-link); }
 
 .site-footer {
   /* solid color so Safari can tint the address bar (not white) */
-  background-color: var(--footer);
+  background-color: var(--blue);
   color: var(--footer-text);
   padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   display: flex;
@@ -405,7 +400,7 @@ a { color: var(--blue-link); }
   right: 0;
   top: 100%;
   height: max(env(safe-area-inset-bottom, 0px), 48px);
-  background-color: var(--footer);
+  background-color: var(--blue);
   pointer-events: none;
 }
 
