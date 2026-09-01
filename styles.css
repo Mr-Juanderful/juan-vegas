@@ -60,19 +60,17 @@ a { color: var(--blue-link); }
 
 .hero-bg {
   position: absolute;
-  /* oversized + anchored low so desert floor fills behind the portrait */
-  top: -5%;
-  right: -8%;
-  bottom: -36%;
-  left: -8%;
+  top: -4%;
+  right: -4%;
+  bottom: -24%;
+  left: -4%;
   height: auto;
   background:
-    linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.16)),
+    linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.18)),
     url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
-      center 82% / 145% auto no-repeat;
-  /* keep floor large behind portrait (~1/3 of the circle) */
-  transform: translate3d(0, 18px, 0) scale(1);
-  transform-origin: center bottom;
+      center 70% / cover no-repeat;
+  transform: scale(1.12);
+  transform-origin: center 80%;
   will-change: transform;
   z-index: -1;
 }
@@ -151,7 +149,7 @@ a { color: var(--blue-link); }
   z-index: 2;
   background: var(--sand);
   padding: 0 1.25rem 3rem;
-  margin-top: -150px;
+  margin-top: -210px;
   /* soft fade from canyon into desert floor */
   box-shadow: 0 -40px 50px -20px var(--sand);
 }
@@ -221,15 +219,6 @@ a { color: var(--blue-link); }
 
 .values-track::-webkit-scrollbar { display: none; }
 
-.values-hint {
-  margin: 0 auto 0.75rem;
-  text-align: center;
-  color: rgba(255,255,255,0.85);
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
 .value-card {
   scroll-snap-align: center;
   position: relative;
@@ -248,6 +237,7 @@ a { color: var(--blue-link); }
   height: 100%;
   transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 .value-card.is-flipped .value-card-inner {
@@ -266,12 +256,17 @@ a { color: var(--blue-link); }
   align-items: center;
   justify-content: center;
   padding: 1.25rem;
+  /* force a real 3D face on Safari */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .value-front {
   background-image: var(--bg);
   background-size: cover;
   background-position: center;
+  transform: rotateY(0deg) translateZ(1px);
+  -webkit-transform: rotateY(0deg) translateZ(1px);
 }
 
 .value-front::before {
@@ -290,10 +285,40 @@ a { color: var(--blue-link); }
   letter-spacing: 0.02em;
 }
 
+.tap-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0.85rem;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: #fff;
+  opacity: 0.55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.45));
+}
+
+.value-card.is-flipped .tap-hint {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+/* when flipped, kill the front label completely (Safari sometimes ghosts it) */
+.value-card.is-flipped .value-front,
+.value-card.is-flipped .value-front span {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .value-back {
   background: linear-gradient(160deg, #1a2433 0%, #243447 55%, #2c3e50 100%);
   color: #fff;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
+  -webkit-transform: rotateY(180deg) translateZ(1px);
   text-align: center;
   gap: 0.75rem;
   justify-content: center;
@@ -508,7 +533,7 @@ a { color: var(--blue-link); }
   }
 
   .bio {
-    margin-top: -170px;
+    margin-top: -240px;
   }
 
   .bio-inner {

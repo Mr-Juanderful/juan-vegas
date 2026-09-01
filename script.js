@@ -94,7 +94,7 @@ function setupParallax() {
   function update() {
     const y = window.scrollY || 0;
     // Background moves slower (lag behind scroll)
-    if (bg) bg.style.transform = "translate3d(0, " + (18 + y * 0.22) + "px, 0) scale(1)";
+    if (bg) bg.style.transform = "translate3d(0, " + (y * 0.22) + "px, 0) scale(1.12)";
     // Portrait moves faster upward relative to the canyon
     if (photo) photo.style.transform = "translate3d(0, " + (y * -0.18) + "px, 0)";
     ticking = false;
