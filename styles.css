@@ -60,16 +60,19 @@ a { color: var(--blue-link); }
 
 .hero-bg {
   position: absolute;
-  /* bleed into notch / status bar */
-  top: 0;
-  right: 0;
-  bottom: -12%;
-  left: 0;
+  /* slightly oversized so we can zoom out and still cover */
+  top: -8%;
+  right: -6%;
+  bottom: -18%;
+  left: -6%;
   height: auto;
   background:
     linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.18)),
     url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
-      center / cover no-repeat;
+      center 42% / cover no-repeat;
+  /* mild zoom-out so more mountain + dirt show */
+  transform: scale(0.92);
+  transform-origin: center 42%;
   will-change: transform;
   z-index: -1;
 }
@@ -148,7 +151,7 @@ a { color: var(--blue-link); }
   z-index: 2;
   background: var(--sand);
   padding: 0 1.25rem 3rem;
-  margin-top: -200px;
+  margin-top: -150px;
   /* soft fade from canyon into desert floor */
   box-shadow: 0 -40px 50px -20px var(--sand);
 }
@@ -164,9 +167,9 @@ a { color: var(--blue-link); }
 }
 
 .bio-photo {
-  margin-top: -0.5rem;
-  width: min(70vw, 280px);
-  height: min(70vw, 280px);
+  margin-top: 0;
+  width: min(60vw, 240px);
+  height: min(60vw, 240px);
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
@@ -440,7 +443,7 @@ a { color: var(--blue-link); }
   }
 
   .bio {
-    margin-top: -220px;
+    margin-top: -170px;
   }
 
   .bio-inner {
