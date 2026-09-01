@@ -60,17 +60,17 @@ a { color: var(--blue-link); }
 
 .hero-bg {
   position: absolute;
-  top: -4%;
-  right: -4%;
-  bottom: -24%;
-  left: -4%;
+  top: -6%;
+  right: -8%;
+  bottom: -28%;
+  left: -8%;
   height: auto;
   background:
-    linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.18)),
+    linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.2)),
     url("https://img1.wsimg.com/isteam/ip/162dadd0-a0a7-4ed4-aad0-5ee5ae11464e/758D3388-9690-4FCC-8776-20F1BBA89F14.jpeg/:/rs=w:1920,m")
-      center 70% / cover no-repeat;
-  transform: scale(1.12);
-  transform-origin: center 80%;
+      center 78% / cover no-repeat;
+  transform: scale(1.08);
+  transform-origin: center 85%;
   will-change: transform;
   z-index: -1;
 }
@@ -149,7 +149,7 @@ a { color: var(--blue-link); }
   z-index: 2;
   background: var(--sand);
   padding: 0 1.25rem 3rem;
-  margin-top: -210px;
+  margin-top: -230px;
   /* soft fade from canyon into desert floor */
   box-shadow: 0 -40px 50px -20px var(--sand);
 }
@@ -227,7 +227,10 @@ a { color: var(--blue-link); }
   perspective: 1200px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  background: transparent;
+  background: #1a2433;
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .value-card-inner {
@@ -238,10 +241,12 @@ a { color: var(--blue-link); }
   transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
+  background: #1a2433;
+  border-radius: 4px;
 }
 
 .value-card.is-flipped .value-card-inner {
-  transform: rotateY(180deg);
+  transform: rotateY(-180deg);
 }
 
 .value-face {
@@ -256,9 +261,6 @@ a { color: var(--blue-link); }
   align-items: center;
   justify-content: center;
   padding: 1.25rem;
-  /* force a real 3D face on Safari */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
 }
 
 .value-front {
@@ -276,13 +278,15 @@ a { color: var(--blue-link); }
   background: rgba(22, 22, 22, 0.35);
 }
 
-.value-front span {
+.value-front .value-label {
   position: relative;
   z-index: 1;
   font-family: var(--serif);
   font-size: clamp(2rem, 8vw, 2.6rem);
   color: #fff;
   letter-spacing: 0.02em;
+  /* leave room under the word for the tap hand */
+  transform: translateY(-0.65rem);
 }
 
 .tap-hint {
@@ -292,33 +296,38 @@ a { color: var(--blue-link); }
   transform: translateX(-50%);
   z-index: 2;
   color: #fff;
-  opacity: 0.55;
+  opacity: 0.62;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.12rem;
   pointer-events: none;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.45));
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+.tap-hint svg {
+  width: 56px;
+  height: 56px;
+  display: block;
+}
+.tap-hint-label {
+  margin-top: 0.05rem;
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: inherit;
+  line-height: 1;
+  opacity: 1;
 }
 
-.value-card.is-flipped .tap-hint {
-  opacity: 0;
-  visibility: hidden;
-}
-
-
-/* when flipped, kill the front label completely (Safari sometimes ghosts it) */
-.value-card.is-flipped .value-front,
-.value-card.is-flipped .value-front span {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
 
 .value-back {
   background: linear-gradient(160deg, #1a2433 0%, #243447 55%, #2c3e50 100%);
   color: #fff;
-  transform: rotateY(180deg) translateZ(1px);
-  -webkit-transform: rotateY(180deg) translateZ(1px);
+  transform: rotateY(-180deg) translateZ(1px);
+  -webkit-transform: rotateY(-180deg) translateZ(1px);
   text-align: center;
   gap: 0.75rem;
   justify-content: center;
@@ -533,7 +542,7 @@ a { color: var(--blue-link); }
   }
 
   .bio {
-    margin-top: -240px;
+    margin-top: -260px;
   }
 
   .bio-inner {
