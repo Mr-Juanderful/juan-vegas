@@ -1,1 +1,4 @@
-file:///tmp/vcf_push.vcf
+BEGIN:VCARD
+VERSION:3.0
+PLACEHOLDER
+END:VCARD
