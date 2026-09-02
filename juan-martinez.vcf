@@ -1,1 +1,12 @@
-LOAD_FROM_FILE
+BEGIN:VCARD
+VERSION:3.0
+REV:2026-09-02T17:10:00Z
+N:Martinez;Juan;;;
+FN:Juan Martinez
+TEL;TYPE=CELL,VOICE;PREF=1:7022051621
+EMAIL;TYPE=INTERNET:jm@juan.vegas
+URL:www.juan.vegas
+URL:x.com/VoluntaryXCHG
+URL:www.facebook.com/VoluntaryXCHG
+URL:www.linkedin.com/in/juan-martinez
+END:VCARD
