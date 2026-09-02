@@ -19,3 +19,18 @@
   font-feature-settings: normal;
   margin-top: -0.45rem; /* closer to the hand icon */
 }
+
+/* herotop32: contact length + yellow on blue pills */
+.pill-outline {
+  color: #f3e4a0; /* light yellow on button blue */
+}
+.pill-outline:hover,
+.pill-outline:focus-visible {
+  color: #f3e4a0;
+}
+/* Save my contact only — a little longer, close to old “Add me…” width */
+.bio-copy .pill-outline {
+  padding-left: 1.85rem;
+  padding-right: 1.85rem;
+  min-width: 13.5rem;
+}
