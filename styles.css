@@ -615,3 +615,24 @@ a { color: var(--blue-link); }
     transform: none !important;
   }
 }
+
+/* bio title stack — Steward of Liberty + Faith, Family, Freedom */
+.bio-copy .bio-title {
+  margin: 0.15rem 0 0;
+  font-family: "Karla", system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #2c3e50;
+  line-height: 1.25;
+}
+.bio-copy .bio-tagline {
+  margin: 0.2rem 0 0.75rem;
+  font-family: "Karla", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b7280;
+  line-height: 1.3;
+}
