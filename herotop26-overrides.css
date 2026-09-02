@@ -31,3 +31,16 @@
 .pill {
   font-size: calc(0.85rem + 1.5px);
 }
+
+/* herotop36: hide scrollbar (still scrollable) */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* Chrome, Safari */
+}
+body {
+  -ms-overflow-style: none; /* old Edge */
+}
