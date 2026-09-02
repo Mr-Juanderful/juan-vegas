@@ -26,3 +26,8 @@
   padding-right: 1.85rem;
   min-width: 13.5rem;
 }
+
+/* herotop34: pill label ~+1.5px */
+.pill {
+  font-size: calc(0.85rem + 1.5px);
+}
