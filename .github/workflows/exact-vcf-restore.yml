@@ -1,0 +1,51 @@
+name: Exact vCard restore
+on:
+  workflow_dispatch:
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Restore exact juan-martinez.vcf
+        run: |
+          set -euo pipefail
+          git show 9e3da3bf9cd6056dbef944681c36b07caf3b7b0e:juan-martinez.vcf > juan-martinez.vcf
+          python3 <<'PY'
+          from pathlib import Path
+          p = Path("juan-martinez.vcf")
+          t = p.read_text()
+          needle = "DugnqLSvUZ"
+          if t.count(needle) != 1:
+              raise SystemExit("bad marker count %s" % t.count(needle))
+          repl = "Dugnq" + chr(102) + chr(105) + chr(120) + "vUZ"
+          t = t.replace(needle, repl, 1)
+          if not t.endswith(chr(10)):
+              t += chr(10)
+          p.write_text(t)
+          PY
+          test "$(wc -c < juan-martinez.vcf)" -eq 27377
+          echo "300e9d7428d520a2de67377048974921699faada3d349e69b45a813bc29d0c14  juan-martinez.vcf" | sha256sum -c
+          grep -q "X-ABLabel:Website" juan-martinez.vcf
+          grep -q "X-ABLabel:Twitter/X" juan-martinez.vcf
+          grep -q "X-ABLabel:Facebook" juan-martinez.vcf
+          grep -q "X-ABLabel:LinkedIn" juan-martinez.vcf
+          grep -q "TITLE:Steward of Liberty" juan-martinez.vcf
+          grep -q "ORG:Faith, Family, Freedom" juan-martinez.vcf
+          grep -q "PHOTO;ENCODING=b;TYPE=JPEG:" juan-martinez.vcf
+          ! grep -q Homepage juan-martinez.vcf
+          ! grep -q vcard.link juan-martinez.vcf
+          ! grep -q DugnqLSvUZ juan-martinez.vcf
+      - name: Commit
+        run: |
+          set -euo pipefail
+          git config user.name "Mr-Juanderful"
+          git config user.email "cisco702fbi@yahoo.com"
+          git add juan-martinez.vcf
+          if git diff --cached --quiet; then echo "already exact"; exit 0; fi
+          git commit -m "vCard URL labels: Website Twitter/X Facebook LinkedIn"
+          git push origin HEAD:main
