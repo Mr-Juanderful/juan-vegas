@@ -1,4 +1,18 @@
 BEGIN:VCARD
 VERSION:3.0
-PLACEHOLDER
+REV:2026-09-02T19:02:00Z
+N:Martinez;Juan;;;
+FN:Juan Martinez
+TITLE:Steward of Liberty
+ORG:Faith, Family, Freedom
+TEL;TYPE=CELL,VOICE;PREF=1:7022051621
+EMAIL;TYPE=INTERNET:jm@juan.vegas
+item1.URL;TYPE=Website:www.juan.vegas
+item1.X-ABLabel:Website
+item2.URL;TYPE=Twitter:x.com/VoluntaryXCHG
+item2.X-ABLabel:Twitter/X
+item3.URL;TYPE=Facebook:www.facebook.com/VoluntaryXCHG
+item3.X-ABLabel:Facebook
+item4.URL;TYPE=LinkedIn:www.linkedin.com/in/juan-martinez
+item4.X-ABLabel:LinkedIn
 END:VCARD
