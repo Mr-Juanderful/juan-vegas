@@ -1,5 +1,8 @@
 name: Exact vCard restore
 on:
+  push:
+    paths:
+      - "TRIGGER_EXACT_VCF"
   workflow_dispatch:
 jobs:
   restore:
@@ -40,12 +43,14 @@ jobs:
           ! grep -q Homepage juan-martinez.vcf
           ! grep -q vcard.link juan-martinez.vcf
           ! grep -q DugnqLSvUZ juan-martinez.vcf
+          rm -f TRIGGER_EXACT_VCF
       - name: Commit
         run: |
           set -euo pipefail
           git config user.name "Mr-Juanderful"
           git config user.email "cisco702fbi@yahoo.com"
           git add juan-martinez.vcf
+          git add -u TRIGGER_EXACT_VCF || true
           if git diff --cached --quiet; then echo "already exact"; exit 0; fi
           git commit -m "vCard URL labels: Website Twitter/X Facebook LinkedIn"
           git push origin HEAD:main
