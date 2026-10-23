@@ -117,6 +117,6 @@ window.scrollTo(0, 0);
 setupFlipCards();
 setupCarousel("[data-values-track]", "[data-values-dots]");
 setupCarousel("[data-record-track]", "[data-record-dots]", "[data-prev]", "[data-next]");
-setupParallax();
+// setupParallax(); — disabled: scroll-linked translate3d snaps/clips on iOS Safari toolbar collapse
 
 window.addEventListener("load", () => window.scrollTo(0, 0));
