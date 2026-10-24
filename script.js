@@ -86,27 +86,51 @@ function setupCarousel(trackSel, dotsSel, prevSel, nextSel) {
 function setupParallax() {
   const bg = document.querySelector("[data-parallax-bg]");
   const photo = document.querySelector("[data-parallax-photo]");
+  const hero = document.querySelector(".hero");
   if (!bg && !photo) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+  // Cache geometry once; iOS toolbar collapse/expand only changes height,
+  // so we ignore height-only resizes and never read innerHeight per scroll.
+  let heroEnd = 0;
+  let lastW = window.innerWidth;
+  function measure() {
+    heroEnd = hero ? hero.offsetTop + hero.offsetHeight : window.innerHeight;
+  }
+
   let ticking = false;
+  let lastY = -1;
 
   function update() {
-    const y = window.scrollY || 0;
+    ticking = false;
+    // Clamp rubber-band (negative) and freeze once the hero is offscreen
+    const y = Math.min(Math.max(window.scrollY || 0, 0), heroEnd);
+    if (y === lastY) return;
+    lastY = y;
     // Background moves slower (lag behind scroll)
     if (bg) bg.style.transform = "translate3d(0, " + (y * 0.22) + "px, 0) scale(1.08)";
     // Portrait moves faster upward relative to the canyon
     if (photo) photo.style.transform = "translate3d(0, " + (y * -0.18) + "px, 0)";
-    ticking = false;
   }
 
-  window.addEventListener("scroll", () => {
+  function request() {
     if (!ticking) {
-      window.requestAnimationFrame(update);
       ticking = true;
+      window.requestAnimationFrame(update);
     }
+  }
+
+  window.addEventListener("scroll", request, { passive: true });
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => { lastW = window.innerWidth; measure(); lastY = -1; request(); }, 250);
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth === lastW) return; // height-only = iOS toolbar, ignore
+    lastW = window.innerWidth;
+    measure(); lastY = -1; request();
   }, { passive: true });
 
+  measure();
   update();
 }
 
@@ -117,6 +141,6 @@ window.scrollTo(0, 0);
 setupFlipCards();
 setupCarousel("[data-values-track]", "[data-values-dots]");
 setupCarousel("[data-record-track]", "[data-record-dots]", "[data-prev]", "[data-next]");
-// setupParallax(); — disabled: scroll-linked translate3d snaps/clips on iOS Safari toolbar collapse
+setupParallax(); // comment out this line to disable the hero drift
 
 window.addEventListener("load", () => window.scrollTo(0, 0));
