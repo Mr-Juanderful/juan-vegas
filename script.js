@@ -141,6 +141,6 @@ window.scrollTo(0, 0);
 setupFlipCards();
 setupCarousel("[data-values-track]", "[data-values-dots]");
 setupCarousel("[data-record-track]", "[data-record-dots]", "[data-prev]", "[data-next]");
-setupParallax(); // comment out this line to disable the hero drift
+// setupParallax(); — disabled: still stutters on iOS Safari
 
 window.addEventListener("load", () => window.scrollTo(0, 0));

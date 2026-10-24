@@ -185,10 +185,6 @@ a { color: var(--blue-link); }
   box-shadow: none;
   border: 4px solid rgba(255,255,255,0.85);
   will-change: transform;
-  /* own GPU layer at rest so iOS doesn't re-rasterize/clip the circle mid-translate */
-  transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
   background: var(--sand-deep);
 }
 
